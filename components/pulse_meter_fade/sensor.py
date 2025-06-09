@@ -25,11 +25,11 @@ pulse_meter_ns = cg.esphome_ns.namespace("pulse_meter")
 
 CONF_FADE = "fade"
 
-PulseMeterSensor = pulse_meter_ns.class_(
-    "PulseMeterSensor", sensor.Sensor, cg.Component
+PulseMeterFadeSensor = pulse_meter_ns.class_(
+    "PulseMeterFadeSensor", sensor.Sensor, cg.Component
 )
 
-PulseMeterInternalFilterMode = PulseMeterSensor.enum("InternalFilterMode")
+PulseMeterInternalFilterMode = PulseMeterFadeSensor.enum("InternalFilterMode")
 FILTER_MODES = {
     "EDGE": PulseMeterInternalFilterMode.FILTER_EDGE,
     "PULSE": PulseMeterInternalFilterMode.FILTER_PULSE,
@@ -59,7 +59,7 @@ def validate_pulse_meter_pin(value):
 
 
 CONFIG_SCHEMA = sensor.sensor_schema(
-    PulseMeterSensor,
+    PulseMeterFadeSensor,
     unit_of_measurement=UNIT_PULSES_PER_MINUTE,
     icon=ICON_PULSE,
     accuracy_decimals=2,
@@ -104,7 +104,7 @@ async def to_code(config):
     SetTotalPulsesAction,
     cv.Schema(
         {
-            cv.Required(CONF_ID): cv.use_id(PulseMeterSensor),
+            cv.Required(CONF_ID): cv.use_id(PulseMeterFadeSensor),
             cv.Required(CONF_VALUE): cv.templatable(cv.uint32_t),
         }
     ),
