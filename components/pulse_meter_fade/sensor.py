@@ -21,7 +21,7 @@ from esphome.core import CORE
 
 CODEOWNERS = ["@stevebaxter", "@cstaahl", "@TrentHouliston"]
 
-pulse_meter_ns = cg.esphome_ns.namespace("pulse_meter")
+pulse_meter_ns = cg.esphome_ns.namespace("pulse_meter_fade")
 
 CONF_FADE = "fade"
 
