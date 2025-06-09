@@ -2,7 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/core/automation.h"
-#include "esphome/components/pulse_meter_fade/pulse_meter_sensor.h"
+#include "pulse_meter_sensor.h"
 
 namespace esphome {
 
