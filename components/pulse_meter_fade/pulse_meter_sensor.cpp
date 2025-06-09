@@ -5,7 +5,7 @@
 namespace esphome {
 namespace pulse_meter_fade {
 
-static const char *const TAG = "pulse_meter";
+static const char *const TAG = "pulse_meter_fade";
 
 void PulseMeterFadeSensor::set_total_pulses(uint32_t pulses) {
   this->total_pulses_ = pulses;
@@ -150,5 +150,5 @@ void IRAM_ATTR PulseMeterFadeSensor::pulse_intr(PulseMeterFadeSensor *sensor) {
   }
 }
 
-}  // namespace pulse_meter
+}  // namespace pulse_meter_fade
 }  // namespace esphome

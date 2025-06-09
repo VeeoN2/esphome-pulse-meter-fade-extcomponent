@@ -70,5 +70,5 @@ class PulseMeterFadeSensor : public sensor::Sensor, public Component {
   bool last_pin_val_ = false;
 };
 
-}  // namespace pulse_meter
+}  // namespace pulse_meter_fade
 }  // namespace esphome
