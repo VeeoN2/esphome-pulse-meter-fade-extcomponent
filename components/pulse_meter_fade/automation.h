@@ -10,7 +10,7 @@ namespace pulse_meter_fade {
 
 template<typename... Ts> class SetTotalPulsesAction : public Action<Ts...> {
  public:
-  SetTotalPulsesAction(PulseMeterFadeSensor *pulse_meter_fade) : pulse_meter_(pulse_meter) {}
+  SetTotalPulsesAction(PulseMeterFadeSensor *pulse_meter_fade) : pulse_meter_fade_(pulse_meter_fade) {}
 
   TEMPLATABLE_VALUE(uint32_t, total_pulses)
 
