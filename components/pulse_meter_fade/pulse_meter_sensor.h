@@ -8,9 +8,9 @@
 #include <cinttypes>
 
 namespace esphome {
-namespace pulse_meter {
+namespace pulse_meter_fade {
 
-class PulseMeterSensor : public sensor::Sensor, public Component {
+class PulseMeterFadeSensor : public sensor::Sensor, public Component {
  public:
   enum InternalFilterMode {
     FILTER_EDGE = 0,
@@ -32,8 +32,8 @@ class PulseMeterSensor : public sensor::Sensor, public Component {
   void dump_config() override;
 
  protected:
-  static void edge_intr(PulseMeterSensor *sensor);
-  static void pulse_intr(PulseMeterSensor *sensor);
+  static void edge_intr(PulseMeterFadeSensor *sensor);
+  static void pulse_intr(PulseMeterFadeSensor *sensor);
 
   InternalGPIOPin *pin_{nullptr};
   uint32_t filter_us_ = 0;

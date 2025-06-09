@@ -3,18 +3,18 @@
 #include "esphome/core/log.h"
 
 namespace esphome {
-namespace pulse_meter {
+namespace pulse_meter_fade {
 
 static const char *const TAG = "pulse_meter";
 
-void PulseMeterSensor::set_total_pulses(uint32_t pulses) {
+void PulseMeterFadeSensor::set_total_pulses(uint32_t pulses) {
   this->total_pulses_ = pulses;
   if (this->total_sensor_ != nullptr) {
     this->total_sensor_->publish_state(this->total_pulses_);
   }
 }
 
-void PulseMeterSensor::setup() {
+void PulseMeterFadeSensor::setup() {
   this->pin_->setup();
   this->isr_pin_ = pin_->to_isr();
 
@@ -22,13 +22,13 @@ void PulseMeterSensor::setup() {
   this->last_processed_edge_us_ = micros();
 
   if (this->filter_mode_ == FILTER_EDGE) {
-    this->pin_->attach_interrupt(PulseMeterSensor::edge_intr, this, gpio::INTERRUPT_RISING_EDGE);
+    this->pin_->attach_interrupt(PulseMeterFadeSensor::edge_intr, this, gpio::INTERRUPT_RISING_EDGE);
   } else if (this->filter_mode_ == FILTER_PULSE) {
-    this->pin_->attach_interrupt(PulseMeterSensor::pulse_intr, this, gpio::INTERRUPT_ANY_EDGE);
+    this->pin_->attach_interrupt(PulseMeterFadeSensor::pulse_intr, this, gpio::INTERRUPT_ANY_EDGE);
   }
 }
 
-void PulseMeterSensor::loop() {
+void PulseMeterFadeSensor::loop() {
   // Reset the count in get before we pass it back to the ISR as set
   this->get_->count_ = 0;
 
@@ -90,9 +90,9 @@ void PulseMeterSensor::loop() {
   }
 }
 
-float PulseMeterSensor::get_setup_priority() const { return setup_priority::DATA; }
+float PulseMeterFadeSensor::get_setup_priority() const { return setup_priority::DATA; }
 
-void PulseMeterSensor::dump_config() {
+void PulseMeterFadeSensor::dump_config() {
   LOG_SENSOR("", "Pulse Meter", this);
   LOG_PIN("  Pin: ", this->pin_);
   if (this->filter_mode_ == FILTER_EDGE) {
@@ -104,7 +104,7 @@ void PulseMeterSensor::dump_config() {
                 this->timeout_us_ / 1000000);
 }
 
-void IRAM_ATTR PulseMeterSensor::edge_intr(PulseMeterSensor *sensor) {
+void IRAM_ATTR PulseMeterFadeSensor::edge_intr(PulseMeterFadeSensor *sensor) {
   // This is an interrupt handler - we can't call any virtual method from this method
   // Get the current time before we do anything else so the measurements are consistent
   const uint32_t now = micros();
@@ -116,7 +116,7 @@ void IRAM_ATTR PulseMeterSensor::edge_intr(PulseMeterSensor *sensor) {
   }
 }
 
-void IRAM_ATTR PulseMeterSensor::pulse_intr(PulseMeterSensor *sensor) {
+void IRAM_ATTR PulseMeterFadeSensor::pulse_intr(PulseMeterFadeSensor *sensor) {
   // This is an interrupt handler - we can't call any virtual method from this method
   // Get the current time before we do anything else so the measurements are consistent
   const uint32_t now = micros();
