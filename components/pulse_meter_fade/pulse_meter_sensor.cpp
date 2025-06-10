@@ -185,7 +185,6 @@ void IRAM_ATTR PulseMeterFadeSensor::pulse_intr(PulseMeterFadeSensor *sensor) {
   state.last_intr_ = now;
     sensor->last_pin_val_ = pin_val;
   }
-}
 
 }  // namespace pulse_meter_fade
 }  // namespace esphome
