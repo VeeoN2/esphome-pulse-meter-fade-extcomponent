@@ -48,9 +48,9 @@ void PulseMeterFadeSensor::loop() {
     // When the main loop detects an edge that the ISR didn't it will run the ISR functions directly.
     bool current = this->pin_->digital_read();
     if (this->filter_mode_ == FILTER_EDGE && current && !this->last_pin_val_) {
-      PulseMeterSensor::edge_intr(this);
+      PulseMeterFadeSensor::edge_intr(this);
     } else if (this->filter_mode_ == FILTER_PULSE && current != this->last_pin_val_) {
-      PulseMeterSensor::pulse_intr(this);
+      PulseMeterFadeSensor::pulse_intr(this);
     }
     this->last_pin_val_ = current;
 
