@@ -80,7 +80,7 @@ CONFIG_SCHEMA = sensor.sensor_schema(
             FILTER_MODES, upper=True
         ),
         cv.Optional(CONF_FADE, default=False): cv.boolean,
-        cv.Optional(CONF_FADE_INTERVAL, default=1.15): cv.float_range(1,10),
+        cv.Optional(CONF_FADE_INTERVAL, default=1.15): cv.float_range(1,5),
     }
 )
 
