@@ -114,7 +114,7 @@ void PulseMeterFadeSensor::loop() {
                    time_since_valid_edge_us / 1000000);
           this->publish_state(0.0f);
         } else if (this->fade_mode_ && (time_since_valid_edge_us >= this->last_pulse_width_us_ * 1.1)) {
-          ESP_LOGV(TAG, "Fading, time_since_valid_edge_us: %" PRIu32 "md, last_pulse_width_us: ",(time_since_valid_edge_us)/1000, (this->last_pulse_width_us_)/1000);
+          ESP_LOGV(TAG, "Fading, time_since_valid_edge_us: %" PRIu32 "ms, last_pulse_width_us: %" PRIu32 "ms",(time_since_valid_edge_us)/1000, (this->last_pulse_width_us_)/1000);
           // In fade mode, if the amount of time since the last pulse has doubled, then we publish a simulated signal
           // The result is if the pulses suddenly stop (or get much slower) the sensor will fade towards 0
           this->last_pulse_width_us_ = time_since_valid_edge_us;
