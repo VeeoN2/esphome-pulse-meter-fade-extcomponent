@@ -42,6 +42,7 @@ class PulseMeterFadeSensor : public sensor::Sensor, public Component {
   sensor::Sensor *total_sensor_{nullptr};
   InternalFilterMode filter_mode_{FILTER_EDGE};
   bool fade_mode_{false};
+  float fade_interval_ = 1.15f; // Default to 15% fade interval
 
   // Variables used in the loop
   enum class MeterState { INITIAL, RUNNING, TIMED_OUT };
