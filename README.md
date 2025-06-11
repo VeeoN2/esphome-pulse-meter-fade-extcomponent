@@ -2,6 +2,7 @@
 Modified the pulse meter code to smooth the output when no pulse is detected - when a pulse is not detected for a longer time than the previous one, the output should be decreased accordingly (Author of modification: github.com/TrentHouliston/esphome/tree/pulse_fade , updated and prepared for direct import as external component by VeeoN)
 
 # Example config:
+```
 - platform: pulse_meter_fade
     pin: 
       number: GPIO15 
@@ -26,3 +27,4 @@ Modified the pulse meter code to smooth the output when no pulse is detected - w
       accuracy_decimals: 1
       filters:
         - multiply: 0.1999
+```
