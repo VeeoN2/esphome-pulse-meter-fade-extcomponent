@@ -23,6 +23,7 @@ class PulseMeterFadeSensor : public sensor::Sensor, public Component {
   void set_total_sensor(sensor::Sensor *sensor) { this->total_sensor_ = sensor; }
   void set_filter_mode(InternalFilterMode mode) { this->filter_mode_ = mode; }
   void set_fade(bool fade) { this->fade_mode_ = fade; }
+  void set_fade_interval(float fade_interval) { this->fade_interval_ = fade_interval; }
 
   void set_total_pulses(uint32_t pulses);
 
