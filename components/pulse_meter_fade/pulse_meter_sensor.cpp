@@ -31,6 +31,9 @@ void PulseMeterFadeSensor::setup() {
     this->pulse_state_.latched_ = this->last_pin_val_;
     this->pin_->attach_interrupt(PulseMeterFadeSensor::pulse_intr, this, gpio::INTERRUPT_ANY_EDGE);
   }
+  if (this->fade_mode_){
+    this->last_pulse_width_us_ = this->timeout_us_;  // Start with a long pulse width so the there is no fade at the start
+  }
 }
 
 void PulseMeterFadeSensor::loop() {
@@ -115,8 +118,7 @@ void PulseMeterFadeSensor::loop() {
                    time_since_valid_edge_us / 1000000);
           this->publish_state(0.0f);
         } else if (this->fade_mode_ && (time_since_valid_edge_us >= this->last_pulse_width_us_ * 1.1)) {
-          ESP_LOGV(TAG, "Fading, time_since_valid_edge_us: %" PRIu32 "ms, last_pulse_width_us: %" PRIu32 "ms",(time_since_valid_edge_us)/1000, (this->last_pulse_width_us_)/1000);
-          // In fade mode, if the amount of time since the last pulse has doubled, then we publish a simulated signal
+          // In fade mode, if the amount of time since the last pulse is increased by some %(1.1 = 10%), then we publish a simulated signal
           // The result is if the pulses suddenly stop (or get much slower) the sensor will fade towards 0
           this->last_pulse_width_us_ = time_since_valid_edge_us;
           this->publish_state((60.0f * 1000000.0f) / time_since_valid_edge_us);
